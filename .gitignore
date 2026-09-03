@@ -44,5 +44,7 @@ venv/
 __pycache__/
 *.py[cod]
 
-# Cursor / local
-.cursor/
+# Cursor / local（技能要进仓库，其它 .cursor 配置仍忽略）
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
