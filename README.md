@@ -35,7 +35,7 @@ npm run dev
 .venv/bin/python -m server.train_cli
 ```
 
-权重默认存 `server/models/dqn.pt`（不进 git，本地训练后自动生成）。
+仓库里带一份训练好的 `server/models/dqn.pt`（约 793 局、近 50 局均分约 36），clone 后可直接在看板里观看。继续训练会覆盖该文件。早期表格 Q 的 `server/models/qtable.json` 也一并保留。
 
 ## 文档
 

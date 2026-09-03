@@ -43,8 +43,6 @@ __screenshots__/
 venv/
 __pycache__/
 *.py[cod]
-server/models/qtable.json
-server/models/dqn.pt
 
 # Cursor / local
 .cursor/
