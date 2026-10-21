@@ -1,0 +1,29 @@
+services:
+  snake-rl:
+    build:
+      context: .
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:24-bookworm-slim}
+        PYTHON_IMAGE: ${PYTHON_IMAGE:-python:3.12-slim}
+        NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmjs.org}
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-https://pypi.org/simple}
+        TORCH_INDEX_URL: ${TORCH_INDEX_URL:-https://download.pytorch.org/whl/cpu}
+    image: snake-rl:latest
+    container_name: snake-rl
+    ports:
+      # 只暴露到 Tailscale 可达的网卡；如需公网再改 0.0.0.0 并配置安全组。
+      - "${SNAKE_BIND:-0.0.0.0}:${SNAKE_PORT:-8000}:8000"
+    volumes:
+      # 训练保存的 dqn.pt 落在宿主机，容器重建不丢。
+      - ./server/models:/app/server/models
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/train/status', timeout=2)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
