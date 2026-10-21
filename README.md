@@ -4,6 +4,8 @@
 
 当前配方：4 通道卷积、Double DQN、优先回放、两层动作掩码、长度 ≥ 20 时安全 BFS 吃豆否则跟尾。看板约 793 局近 50 局均分约 **36**，死因以超时为主；8×8 满分 61。过程见 [docs/iterative-study.md](docs/iterative-study.md)。
 
+**在线看板**：<https://snake.mingstep.top>
+
 ## 分工
 
 - **Python**：碰撞、食物、奖励、CNN 学 Q。训练循环在进程内 `env.step()`，不走 HTTP。
